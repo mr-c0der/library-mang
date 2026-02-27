@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 const empty = { party: '', amount: '', direction: 'لي', description: '', date: new Date().toISOString().split('T')[0], dueDate: '', isPaid: false, notes: '' };
 
@@ -37,9 +37,9 @@ export default function Debts() {
         </div>
       </div>
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3,1fr)', marginBottom: 20 }}>
-        <div className="stat-card green"><div className="stat-icon">💰</div><div className="stat-value">{fmt(owedToMe)}</div><div className="stat-label">ديون لي (دينار)</div></div>
-        <div className="stat-card red"><div className="stat-icon">💳</div><div className="stat-value">{fmt(owedByMe)}</div><div className="stat-label">ديون علي (دينار)</div></div>
-        <div className="stat-card gold"><div className="stat-icon">⚖️</div><div className="stat-value">{fmt(owedToMe - owedByMe)}</div><div className="stat-label">الصافي (دينار)</div></div>
+        <div className="stat-card green"><div className="stat-icon">💰</div><div className="stat-value">{fmt(owedToMe)}</div><div className="stat-label">ديون لي (جنيه)</div></div>
+        <div className="stat-card red"><div className="stat-icon">💳</div><div className="stat-value">{fmt(owedByMe)}</div><div className="stat-label">ديون علي (جنيه)</div></div>
+        <div className="stat-card gold"><div className="stat-icon">⚖️</div><div className="stat-value">{fmt(owedToMe - owedByMe)}</div><div className="stat-label">الصافي (جنيه)</div></div>
       </div>
       <div className="card">
         {loading ? <div className="loading-wrapper"><div className="spinner"></div></div> :
@@ -51,7 +51,7 @@ export default function Debts() {
                 <td>{i + 1}</td>
                 <td><strong style={{ color: 'var(--text-primary)' }}>{d.party}</strong></td>
                 <td><span className={`badge ${d.direction === 'لي' ? 'badge-success' : 'badge-danger'}`}>{d.direction}</span></td>
-                <td style={{ fontWeight: 700, color: d.direction === 'لي' ? 'var(--success)' : 'var(--danger)' }}>{fmt(d.amount)} د</td>
+                <td style={{ fontWeight: 700, color: d.direction === 'لي' ? 'var(--success)' : 'var(--danger)' }}>{fmt(d.amount)} ج</td>
                 <td style={{ fontSize: 12 }}>{d.description || '-'}</td>
                 <td style={{ fontSize: 12 }}>{d.dueDate ? new Date(d.dueDate).toLocaleDateString('ar-EG') : '-'}</td>
                 <td>
@@ -79,7 +79,7 @@ export default function Debts() {
                 <div className="form-group"><label className="form-label">الاتجاه *</label><select className="form-control" value={form.direction} onChange={e => setForm({ ...form, direction: e.target.value })}><option value="لي">لي (يديني)</option><option value="علي">علي (أدين له)</option></select></div>
               </div>
               <div className="two-col-grid">
-                <div className="form-group"><label className="form-label">المبلغ (دينار) *</label><input className="form-control" type="number" min="0" required value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} /></div>
+                <div className="form-group"><label className="form-label">المبلغ (جنيه) *</label><input className="form-control" type="number" min="0" required value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} /></div>
                 <div className="form-group"><label className="form-label">تاريخ الاستحقاق</label><input className="form-control" type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} /></div>
               </div>
               <div className="form-group"><label className="form-label">الوصف</label><textarea className="form-control" rows="2" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></div>

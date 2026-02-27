@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 const empty = { customer: '', book: '', quantity: 1, unitPrice: '', totalAmount: '', isPaid: false, notes: '' };
@@ -64,8 +64,8 @@ export default function Sales() {
       </div>
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 }}>
-        <div className="stat-card green"><div className="stat-icon">💰</div><div className="stat-value">{fmt(totalRev)}</div><div className="stat-label">إيرادات مستلمة (دينار)</div></div>
-        <div className="stat-card gold"><div className="stat-icon">⏳</div><div className="stat-value">{fmt(pending)}</div><div className="stat-label">مبالغ معلقة (دينار)</div></div>
+        <div className="stat-card green"><div className="stat-icon">💰</div><div className="stat-value">{fmt(totalRev)}</div><div className="stat-label">إيرادات مستلمة (جنيه)</div></div>
+        <div className="stat-card gold"><div className="stat-icon">⏳</div><div className="stat-value">{fmt(pending)}</div><div className="stat-label">مبالغ معلقة (جنيه)</div></div>
         <div className="stat-card blue"><div className="stat-icon">🛒</div><div className="stat-value">{sales.length}</div><div className="stat-label">إجمالي عمليات البيع</div></div>
       </div>
 
@@ -82,7 +82,7 @@ export default function Sales() {
                     <td><strong style={{ color: 'var(--text-primary)' }}>{s.customer?.name || '-'}</strong></td>
                     <td>{s.book?.title || '-'}</td>
                     <td><span className="badge badge-info">{s.quantity}</span></td>
-                    <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(s.totalAmount)} د</td>
+                    <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(s.totalAmount)} ج</td>
                     <td>
                       <button onClick={() => togglePaid(s._id, s.isPaid)} className={`badge ${s.isPaid ? 'badge-success' : 'badge-danger'}`} style={{ border: 'none', cursor: 'pointer' }}>
                         {s.isPaid ? '✅ مدفوع' : '❌ غير مدفوع'}
@@ -116,7 +116,7 @@ export default function Sales() {
                   <label className="form-label">الكتاب *</label>
                   <select className="form-control" required value={form.book} onChange={e => onBookChange(e.target.value)}>
                     <option value="">اختر كتاباً...</option>
-                    {books.map(b => <option key={b._id} value={b._id}>{b.title} - ({b.stock} متاح) - {b.salePrice} د</option>)}
+                    {books.map(b => <option key={b._id} value={b._id}>{b.title} - ({b.stock} متاح) - {b.salePrice} ج</option>)}
                   </select>
                 </div>
                 <div className="two-col-grid">
@@ -125,7 +125,7 @@ export default function Sales() {
                     <input className="form-control" type="number" min="1" required value={form.quantity} onChange={e => onQtyChange(Number(e.target.value))} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">الإجمالي (دينار)</label>
+                    <label className="form-label">الإجمالي (جنيه)</label>
                     <input className="form-control" type="number" value={form.totalAmount} onChange={e => setForm({ ...form, totalAmount: e.target.value })} required />
                   </div>
                 </div>

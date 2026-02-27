@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement,
@@ -65,17 +65,17 @@ export default function Dashboard() {
         <div className="stat-card green">
           <div className="stat-icon">💰</div>
           <div className="stat-value">{fmt(summary?.revenue?.total)}</div>
-          <div className="stat-label">إجمالي الإيرادات (دينار)</div>
+          <div className="stat-label">إجمالي الإيرادات (جنيه)</div>
         </div>
         <div className="stat-card red">
           <div className="stat-icon">📉</div>
           <div className="stat-value">{fmt(summary?.expenses?.total)}</div>
-          <div className="stat-label">إجمالي المصروفات (دينار)</div>
+          <div className="stat-label">إجمالي المصروفات (جنيه)</div>
         </div>
         <div className={`stat-card ${(summary?.netProfit || 0) >= 0 ? 'gold' : 'red'}`}>
           <div className="stat-icon">{(summary?.netProfit || 0) >= 0 ? '📈' : '📉'}</div>
           <div className="stat-value">{fmt(summary?.netProfit)}</div>
-          <div className="stat-label">صافي الربح (دينار)</div>
+          <div className="stat-label">صافي الربح (جنيه)</div>
         </div>
         <div className="stat-card blue">
           <div className="stat-icon">🔄</div>
@@ -90,7 +90,7 @@ export default function Dashboard() {
         <div className="stat-card gold">
           <div className="stat-icon">⚖️</div>
           <div className="stat-value">{fmt(summary?.debts?.owedToMe)}</div>
-          <div className="stat-label">ديون لي (دينار)</div>
+          <div className="stat-label">ديون لي (جنيه)</div>
         </div>
       </div>
 
@@ -135,34 +135,34 @@ export default function Dashboard() {
           <h3 style={{ marginBottom: 16, fontSize: 16, fontWeight: 700, color: 'var(--accent)' }}>💳 الملخص المالي السريع</h3>
           <div className="summary-row">
             <span className="label">إيرادات المبيعات</span>
-            <span className="value" style={{ color: 'var(--success)' }}>{fmt(summary?.revenue?.sales)} د</span>
+            <span className="value" style={{ color: 'var(--success)' }}>{fmt(summary?.revenue?.sales)} ج</span>
           </div>
           <div className="summary-row">
             <span className="label">إيرادات التأجير</span>
-            <span className="value" style={{ color: 'var(--success)' }}>{fmt(summary?.revenue?.rentals)} د</span>
+            <span className="value" style={{ color: 'var(--success)' }}>{fmt(summary?.revenue?.rentals)} ج</span>
           </div>
           <div className="summary-row">
             <span className="label">غرامات التأخير</span>
-            <span className="value" style={{ color: 'var(--warning)' }}>{fmt(summary?.revenue?.lateFees)} د</span>
+            <span className="value" style={{ color: 'var(--warning)' }}>{fmt(summary?.revenue?.lateFees)} ج</span>
           </div>
           <div className="summary-row">
             <span className="label">مصروفات تشغيلية</span>
-            <span className="value" style={{ color: 'var(--danger)' }}>{fmt(summary?.expenses?.operations)} د</span>
+            <span className="value" style={{ color: 'var(--danger)' }}>{fmt(summary?.expenses?.operations)} ج</span>
           </div>
           <div className="summary-row">
             <span className="label">إجمالي الرواتب</span>
-            <span className="value" style={{ color: 'var(--danger)' }}>{fmt(summary?.expenses?.salaries)} د</span>
+            <span className="value" style={{ color: 'var(--danger)' }}>{fmt(summary?.expenses?.salaries)} ج</span>
           </div>
           <div className="summary-row total">
             <span className="label" style={{ fontWeight: 800 }}>صافي الربح</span>
             <span className="value" style={{ color: (summary?.netProfit || 0) >= 0 ? 'var(--success)' : 'var(--danger)', fontSize: 18 }}>
-              {fmt(summary?.netProfit)} د
+              {fmt(summary?.netProfit)} ج
             </span>
           </div>
           {(summary?.pending?.unpaidSales > 0 || summary?.pending?.unpaidRentals > 0) && (
             <div style={{ marginTop: 14, padding: '10px 14px', background: 'rgba(243,156,18,0.1)', borderRadius: 8, border: '1px solid rgba(243,156,18,0.3)' }}>
               <div style={{ fontSize: 12, color: 'var(--warning)', fontWeight: 600 }}>
-                ⚠️ مبالغ غير مدفوعة: {fmt((summary?.pending?.unpaidSales || 0) + (summary?.pending?.unpaidRentals || 0))} د
+                ⚠️ مبالغ غير مدفوعة: {fmt((summary?.pending?.unpaidSales || 0) + (summary?.pending?.unpaidRentals || 0))} ج
               </div>
             </div>
           )}

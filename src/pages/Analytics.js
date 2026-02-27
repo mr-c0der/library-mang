@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import api from '../api/axios';
@@ -60,8 +60,8 @@ export default function Analytics() {
   const monthlyTrend = {
     labels: monthly.map(m => MONTHS[m.month - 1]),
     datasets: [
-      { label: 'إيرادات', data: monthly.map(m => m.revenue), backgroundColor: 'rgba(39,174,96,0.8)', borderRadius: 4 },
-      { label: 'مصروفات', data: monthly.map(m => m.expenses), backgroundColor: 'rgba(231,76,60,0.7)', borderRadius: 4 },
+      { label: 'إيرادات (جنيه)', data: monthly.map(m => m.revenue), backgroundColor: 'rgba(39,174,96,0.8)', borderRadius: 4 },
+      { label: 'مصروفات (جنيه)', data: monthly.map(m => m.expenses), backgroundColor: 'rgba(231,76,60,0.7)', borderRadius: 4 },
     ]
   };
 

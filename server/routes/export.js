@@ -26,7 +26,7 @@ router.get('/excel', auth, async (req, res) => {
       { header: 'اسم العميل', key: 'customer', width: 20 },
       { header: 'الكتاب', key: 'book', width: 25 },
       { header: 'الكمية', key: 'qty', width: 10 },
-      { header: 'المبلغ (دينار)', key: 'amount', width: 15 },
+      { header: 'المبلغ (جنيه)', key: 'amount', width: 15 },
       { header: 'حالة الدفع', key: 'paid', width: 12 },
       { header: 'التاريخ', key: 'date', width: 15 }
     ];
@@ -48,7 +48,7 @@ router.get('/excel', auth, async (req, res) => {
       { header: 'اسم العميل', key: 'customer', width: 20 },
       { header: 'الكتاب', key: 'book', width: 25 },
       { header: 'مدة التأجير (أيام)', key: 'days', width: 18 },
-      { header: 'المبلغ (دينار)', key: 'amount', width: 15 },
+      { header: 'المبلغ (جنيه)', key: 'amount', width: 15 },
       { header: 'غرامة التأخير', key: 'late', width: 15 },
       { header: 'الحالة', key: 'status', width: 12 },
       { header: 'تاريخ الإرجاع', key: 'due', width: 15 }
@@ -68,7 +68,7 @@ router.get('/excel', auth, async (req, res) => {
       { header: 'البند', key: 'title', width: 25 },
       { header: 'الفئة', key: 'cat', width: 15 },
       { header: 'النوع', key: 'type', width: 12 },
-      { header: 'المبلغ (دينار)', key: 'amount', width: 15 },
+      { header: 'المبلغ (جنيه)', key: 'amount', width: 15 },
       { header: 'التاريخ', key: 'date', width: 15 }
     ];
     applyStyle(expSheet.getRow(1), headerStyle);
@@ -84,7 +84,7 @@ router.get('/excel', auth, async (req, res) => {
       { header: 'رقم', key: 'num', width: 8 },
       { header: 'الاسم', key: 'name', width: 20 },
       { header: 'المنصب', key: 'pos', width: 20 },
-      { header: 'الراتب (دينار)', key: 'salary', width: 15 },
+      { header: 'الراتب (جنيه)', key: 'salary', width: 15 },
       { header: 'الهاتف', key: 'phone', width: 15 }
     ];
     applyStyle(empSheet.getRow(1), headerStyle);
@@ -96,7 +96,7 @@ router.get('/excel', auth, async (req, res) => {
 
     // Sheet 5: Financial Summary
     const summarySheet = workbook.addWorksheet('الملخص المالي', { views: [{ rightToLeft: true }] });
-    summarySheet.columns = [{ header: 'البند', key: 'item', width: 30 }, { header: 'المبلغ (دينار)', key: 'amount', width: 20 }];
+    summarySheet.columns = [{ header: 'البند', key: 'item', width: 30 }, { header: 'المبلغ (جنيه)', key: 'amount', width: 20 }];
     applyStyle(summarySheet.getRow(1), headerStyle);
     const totalSalesRev = sales.filter(s => s.isPaid).reduce((t, s) => t + s.totalAmount, 0);
     const totalRentalRev = rentals.filter(r => r.isPaid).reduce((t, r) => t + r.totalAmount, 0);

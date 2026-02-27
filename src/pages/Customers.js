@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 const empty = { name: '', age: '', gender: 'ذكر', phone: '', email: '', notes: '' };

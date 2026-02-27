@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 const TYPES = ['أجهزة كمبيوتر', 'أثاث', 'معدات', 'مركبات', 'أخرى'];
 const empty = { name: '', type: 'أثاث', purchasePrice: '', currentValue: '', purchaseDate: new Date().toISOString().split('T')[0], quantity: 1, notes: '' };
@@ -31,7 +31,7 @@ export default function Assets() {
       </div>
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(2,1fr)', marginBottom: 20 }}>
         <div className="stat-card blue"><div className="stat-icon">🏢</div><div className="stat-value">{assets.length}</div><div className="stat-label">عدد الأصول</div></div>
-        <div className="stat-card gold"><div className="stat-icon">💎</div><div className="stat-value">{fmt(totalValue)}</div><div className="stat-label">إجمالي قيمة الأصول (دينار)</div></div>
+        <div className="stat-card gold"><div className="stat-icon">💎</div><div className="stat-value">{fmt(totalValue)}</div><div className="stat-label">إجمالي قيمة الأصول (جنيه)</div></div>
       </div>
       <div className="card">
         {loading ? <div className="loading-wrapper"><div className="spinner"></div></div> :
@@ -44,8 +44,8 @@ export default function Assets() {
                 <td><strong style={{ color: 'var(--text-primary)' }}>{a.name}</strong></td>
                 <td><span className="badge badge-info">{a.type}</span></td>
                 <td>{a.quantity}</td>
-                <td style={{ color: 'var(--text-secondary)' }}>{fmt(a.purchasePrice)} د</td>
-                <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(a.currentValue)} د</td>
+                <td style={{ color: 'var(--text-secondary)' }}>{fmt(a.purchasePrice)} ج</td>
+                <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(a.currentValue)} ج</td>
                 <td style={{ fontSize: 12 }}>{new Date(a.purchaseDate).toLocaleDateString('ar-EG')}</td>
                 <td><div style={{ display: 'flex', gap: 8 }}>
                   <button className="btn btn-secondary btn-sm" onClick={() => openEdit(a)}>✏️</button>

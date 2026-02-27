@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 const empty = { name: '', position: '', salary: '', phone: '', email: '', hireDate: new Date().toISOString().split('T')[0], notes: '' };
 
@@ -31,7 +31,7 @@ export default function Employees() {
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3,1fr)', marginBottom: 20 }}>
         <div className="stat-card blue"><div className="stat-icon">👨‍💼</div><div className="stat-value">{employees.length}</div><div className="stat-label">إجمالي الموظفين</div></div>
         <div className="stat-card green"><div className="stat-icon">✅</div><div className="stat-value">{employees.filter(e => e.isActive).length}</div><div className="stat-label">موظفون نشطون</div></div>
-        <div className="stat-card red"><div className="stat-icon">💸</div><div className="stat-value">{fmt(totalSalaries)}</div><div className="stat-label">إجمالي الرواتب (دينار)</div></div>
+        <div className="stat-card red"><div className="stat-icon">💸</div><div className="stat-value">{fmt(totalSalaries)}</div><div className="stat-label">إجمالي الرواتب (جنيه)</div></div>
       </div>
       <div className="card">
         {loading ? <div className="loading-wrapper"><div className="spinner"></div></div> :
@@ -43,7 +43,7 @@ export default function Employees() {
                 <td>{i + 1}</td>
                 <td><strong style={{ color: 'var(--text-primary)' }}>{e.name}</strong></td>
                 <td>{e.position}</td>
-                <td style={{ color: 'var(--danger)', fontWeight: 700 }}>{fmt(e.salary)} د</td>
+                <td style={{ color: 'var(--danger)', fontWeight: 700 }}>{fmt(e.salary)} ج</td>
                 <td>{e.phone || '-'}</td>
                 <td style={{ fontSize: 12 }}>{new Date(e.hireDate).toLocaleDateString('ar-EG')}</td>
                 <td><span className={`badge ${e.isActive ? 'badge-success' : 'badge-danger'}`}>{e.isActive ? 'نشط' : 'غير نشط'}</span></td>
@@ -67,7 +67,7 @@ export default function Employees() {
                 <div className="form-group"><label className="form-label">المنصب *</label><input className="form-control" required value={form.position} onChange={e => setForm({ ...form, position: e.target.value })} /></div>
               </div>
               <div className="two-col-grid">
-                <div className="form-group"><label className="form-label">الراتب (دينار) *</label><input className="form-control" type="number" min="0" required value={form.salary} onChange={e => setForm({ ...form, salary: e.target.value })} /></div>
+                <div className="form-group"><label className="form-label">الراتب (جنيه) *</label><input className="form-control" type="number" min="0" required value={form.salary} onChange={e => setForm({ ...form, salary: e.target.value })} /></div>
                 <div className="form-group"><label className="form-label">الهاتف</label><input className="form-control" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} /></div>
               </div>
               <div className="two-col-grid">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 const CATS = ['راتب موظف', 'كهرباء', 'مياه', 'إنترنت', 'شراء كتب', 'إيجار', 'صيانة', 'أخرى'];
@@ -54,9 +54,9 @@ export default function Expenses() {
       </div>
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3,1fr)', marginBottom: 20 }}>
-        <div className="stat-card red"><div className="stat-icon">📉</div><div className="stat-value">{fmt(totalFixed + totalVar)}</div><div className="stat-label">إجمالي المصروفات (دينار)</div></div>
-        <div className="stat-card red"><div className="stat-icon">📌</div><div className="stat-value">{fmt(totalFixed)}</div><div className="stat-label">مصروفات ثابتة (دينار)</div></div>
-        <div className="stat-card gold"><div className="stat-icon">📊</div><div className="stat-value">{fmt(totalVar)}</div><div className="stat-label">مصروفات متغيرة (دينار)</div></div>
+        <div className="stat-card red"><div className="stat-icon">📉</div><div className="stat-value">{fmt(totalFixed + totalVar)}</div><div className="stat-label">إجمالي المصروفات (جنيه)</div></div>
+        <div className="stat-card red"><div className="stat-icon">📌</div><div className="stat-value">{fmt(totalFixed)}</div><div className="stat-label">مصروفات ثابتة (جنيه)</div></div>
+        <div className="stat-card gold"><div className="stat-icon">📊</div><div className="stat-value">{fmt(totalVar)}</div><div className="stat-label">مصروفات متغيرة (جنيه)</div></div>
       </div>
 
       <div className="card">
@@ -72,7 +72,7 @@ export default function Expenses() {
                     <td><strong style={{ color: 'var(--text-primary)' }}>{e.title}</strong></td>
                     <td><span className="badge badge-info">{e.category}</span></td>
                     <td><span className={`badge ${e.type === 'ثابت' ? 'badge-danger' : 'badge-warning'}`}>{e.type}</span></td>
-                    <td style={{ color: 'var(--danger)', fontWeight: 700 }}>{fmt(e.amount)} د</td>
+                    <td style={{ color: 'var(--danger)', fontWeight: 700 }}>{fmt(e.amount)} ج</td>
                     <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>{new Date(e.date).toLocaleDateString('ar-EG')}</td>
                     <td>
                       <div style={{ display: 'flex', gap: 8 }}>
@@ -116,7 +116,7 @@ export default function Expenses() {
                 </div>
                 <div className="two-col-grid">
                   <div className="form-group">
-                    <label className="form-label">المبلغ (دينار) *</label>
+                    <label className="form-label">المبلغ (جنيه) *</label>
                     <input className="form-control" type="number" min="0" required value={form.amount} onChange={e => setForm({ ...form, amount: e.target.value })} />
                   </div>
                   <div className="form-group">

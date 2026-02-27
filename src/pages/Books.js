@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 const CATEGORIES = ['تعليمي', 'أدب', 'قصص أطفال', 'ديني', 'علمي', 'تاريخ', 'رواية', 'أخرى'];
@@ -73,8 +73,8 @@ export default function Books() {
                     <td><strong style={{ color: 'var(--text-primary)' }}>{b.title}</strong></td>
                     <td>{b.author}</td>
                     <td><span className="badge badge-gold">{b.category}</span></td>
-                    <td style={{ color: 'var(--success)' }}>{b.salePrice} د</td>
-                    <td style={{ color: 'var(--info)' }}>{b.rentalPricePerDay} د</td>
+                    <td style={{ color: 'var(--success)' }}>{b.salePrice} ج</td>
+                    <td style={{ color: 'var(--info)' }}>{b.rentalPricePerDay} ج</td>
                     <td>
                       <span className={`badge ${b.stock > 5 ? 'badge-success' : b.stock > 0 ? 'badge-warning' : 'badge-danger'}`}>
                         {b.stock} نسخة
@@ -122,15 +122,15 @@ export default function Books() {
                 </div>
                 <div className="three-col-grid">
                   <div className="form-group">
-                    <label className="form-label">سعر البيع (دينار)</label>
+                    <label className="form-label">سعر البيع (جنيه)</label>
                     <input className="form-control" type="number" min="0" value={form.salePrice} onChange={e => setForm({ ...form, salePrice: e.target.value })} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">سعر التأجير/يوم</label>
+                    <label className="form-label">سعر التأجير/يوم (جنيه)</label>
                     <input className="form-control" type="number" min="0" value={form.rentalPricePerDay} onChange={e => setForm({ ...form, rentalPricePerDay: e.target.value })} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">سعر الشراء (دينار)</label>
+                    <label className="form-label">سعر الشراء (جنيه)</label>
                     <input className="form-control" type="number" min="0" value={form.purchasePrice} onChange={e => setForm({ ...form, purchasePrice: e.target.value })} />
                   </div>
                 </div>

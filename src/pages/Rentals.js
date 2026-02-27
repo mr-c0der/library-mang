@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 const emptyRental = { customer: '', book: '', durationDays: 1, pricePerDay: '', totalAmount: '', isPaid: false, notes: '' };
@@ -81,7 +81,7 @@ export default function Rentals() {
         <div className="stat-card blue"><div className="stat-icon">🔄</div><div className="stat-value">{rentals.filter(r => r.status === 'نشط').length}</div><div className="stat-label">نشطة</div></div>
         <div className="stat-card red"><div className="stat-icon">⚠️</div><div className="stat-value">{rentals.filter(r => r.status === 'متأخر').length}</div><div className="stat-label">متأخرة</div></div>
         <div className="stat-card green"><div className="stat-icon">✅</div><div className="stat-value">{rentals.filter(r => r.status === 'مُرجَع').length}</div><div className="stat-label">مُرجَعة</div></div>
-        <div className="stat-card gold"><div className="stat-icon">💰</div><div className="stat-value">{fmt(rentals.reduce((t, r) => t + r.lateFee, 0))}</div><div className="stat-label">غرامات (دينار)</div></div>
+        <div className="stat-card gold"><div className="stat-icon">💰</div><div className="stat-value">{fmt(rentals.reduce((t, r) => t + r.lateFee, 0))}</div><div className="stat-label">غرامات (جنيه)</div></div>
       </div>
 
       <div className="card">
@@ -97,8 +97,8 @@ export default function Rentals() {
                     <td><strong style={{ color: 'var(--text-primary)' }}>{r.customer?.name || '-'}</strong></td>
                     <td>{r.book?.title || '-'}</td>
                     <td>{r.durationDays} يوم</td>
-                    <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(r.totalAmount)} د</td>
-                    <td style={{ color: 'var(--danger)' }}>{r.lateFee > 0 ? `${fmt(r.lateFee)} د` : '-'}</td>
+                    <td style={{ color: 'var(--accent)', fontWeight: 700 }}>{fmt(r.totalAmount)} ج</td>
+                    <td style={{ color: 'var(--danger)' }}>{r.lateFee > 0 ? `${fmt(r.lateFee)} ج` : '-'}</td>
                     <td><span className={`badge ${statusColor[r.status] || 'badge-info'}`}>{r.status}</span></td>
                     <td style={{ fontSize: 12, color: 'var(--text-muted)' }}>{new Date(r.dueDate).toLocaleDateString('ar-EG')}</td>
                     <td>
@@ -138,7 +138,7 @@ export default function Rentals() {
                   <label className="form-label">الكتاب *</label>
                   <select className="form-control" required value={form.book} onChange={e => onBookChange(e.target.value)}>
                     <option value="">اختر كتاباً...</option>
-                    {books.map(b => <option key={b._id} value={b._id}>{b.title} - {b.rentalPricePerDay} د/يوم</option>)}
+                    {books.map(b => <option key={b._id} value={b._id}>{b.title} - {b.rentalPricePerDay} ج/يوم</option>)}
                   </select>
                 </div>
                 <div className="two-col-grid">
@@ -147,7 +147,7 @@ export default function Rentals() {
                     <input className="form-control" type="number" min="1" required value={form.durationDays} onChange={e => onDaysChange(Number(e.target.value))} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">الإجمالي (دينار)</label>
+                    <label className="form-label">الإجمالي (جنيه)</label>
                     <input className="form-control" type="number" value={form.totalAmount} onChange={e => setForm({ ...form, totalAmount: e.target.value })} required />
                   </div>
                 </div>
