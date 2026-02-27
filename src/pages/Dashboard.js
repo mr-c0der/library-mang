@@ -14,7 +14,7 @@ const MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','
 export default function Dashboard() {
   const [summary, setSummary] = useState(null);
   const [monthly, setMonthly] = useState([]);
-  const [topBooks, setTopBooks] = useState(null);
+  const [, setTopBooks] = useState(null);
   const [demo, setDemo] = useState(null);
   const [loading, setLoading] = useState(true);
 

@@ -8,8 +8,8 @@ dotenv.config();
 // Build MONGO_URI manually to safely encode special chars in password
 if (!process.env.MONGO_URI_OVERRIDE) {
   const user = encodeURIComponent('managementsystem');
-  const pass = encodeURIComponent('Mis@20262026');
-  process.env.MONGO_URI = `mongodb+srv://${user}:${pass}@laibrarymanagementsyste.qd0qhnx.mongodb.net/?appName=LaibraryManagementSystem`;
+  const pass = encodeURIComponent('MiS20262026');
+  process.env.MONGO_URI = `mongodb+srv://${user}:${pass}@laibrarymanagementsyste.qd0qhnx.mongodb.net/librarydb?retryWrites=true&w=majority&authSource=admin&appName=LaibraryManagementSystem`;
 }
 
 const app = express();
