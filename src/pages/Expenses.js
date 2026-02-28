@@ -35,7 +35,7 @@ export default function Expenses() {
     await api.delete(`/expenses/${id}`); load();
   };
 
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
   const totalFixed = expenses.filter(e => e.type === 'ثابت').reduce((t, e) => t + e.amount, 0);
   const totalVar = expenses.filter(e => e.type === 'متغير').reduce((t, e) => t + e.amount, 0);
 

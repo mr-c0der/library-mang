@@ -10,7 +10,7 @@ export default function Accounting() {
     api.get('/analytics/summary').then(r => setSummary(r.data)).finally(() => setLoading(false));
   }, []);
 
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
 
   const exportExcel = async () => {
     setExporting(true);

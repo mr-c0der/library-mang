@@ -20,7 +20,7 @@ export default function Assets() {
     catch (err) { setError(err.response?.data?.message || 'حدث خطأ'); }
   };
   const handleDelete = async (id) => { if (!window.confirm('حذف هذا الأصل؟')) return; await api.delete(`/assets/${id}`); load(); };
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
   const totalValue = assets.reduce((t, a) => t + a.currentValue * a.quantity, 0);
 
   return (

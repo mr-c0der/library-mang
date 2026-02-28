@@ -21,7 +21,7 @@ export default function Debts() {
   };
   const handleDelete = async (id) => { if (!window.confirm('حذف هذا الدين؟')) return; await api.delete(`/debts/${id}`); load(); };
   const togglePaid = async (id, val) => { await api.put(`/debts/${id}`, { isPaid: !val }); load(); };
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
   const owedToMe = debts.filter(d => d.direction === 'لي' && !d.isPaid).reduce((t, d) => t + d.amount, 0);
   const owedByMe = debts.filter(d => d.direction === 'علي' && !d.isPaid).reduce((t, d) => t + d.amount, 0);
 

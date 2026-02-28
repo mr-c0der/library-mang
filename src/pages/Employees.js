@@ -19,7 +19,7 @@ export default function Employees() {
     catch (err) { setError(err.response?.data?.message || 'حدث خطأ'); }
   };
   const handleDelete = async (id) => { if (!window.confirm('حذف هذا الموظف؟')) return; await api.delete(`/employees/${id}`); load(); };
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
   const totalSalaries = employees.filter(e => e.isActive).reduce((t, e) => t + e.salary, 0);
 
   return (

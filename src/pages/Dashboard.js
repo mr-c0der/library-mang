@@ -30,7 +30,7 @@ export default function Dashboard() {
     }).finally(() => setLoading(false));
   }, []);
 
-  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { minimumFractionDigits: 2 });
+  const fmt = (n) => (n || 0).toLocaleString('ar-EG', { maximumFractionDigits: 2 });
 
   if (loading) return <div className="loading-wrapper"><div className="spinner"></div></div>;
 
