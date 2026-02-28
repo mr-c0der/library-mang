@@ -5,12 +5,13 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Build MONGO_URI manually to safely encode special chars in password
-if (!process.env.MONGO_URI_OVERRIDE) {
+// Use MONGO_URI from environment (Vercel dashboard or .env file)
+// Fallback: build URI from parts for local dev
+const MONGO_URI = process.env.MONGO_URI || (() => {
   const user = encodeURIComponent('managementsystem');
   const pass = encodeURIComponent('MiS20262026');
-  process.env.MONGO_URI = `mongodb+srv://${user}:${pass}@laibrarymanagementsyste.qd0qhnx.mongodb.net/librarydb?retryWrites=true&w=majority&authSource=admin&appName=LaibraryManagementSystem`;
-}
+  return `mongodb+srv://${user}:${pass}@laibrarymanagementsyste.qd0qhnx.mongodb.net/librarydb?retryWrites=true&w=majority&authSource=admin&appName=LaibraryManagementSystem`;
+})();
 
 const app = express();
 
@@ -31,14 +32,31 @@ app.use('/api/debts', require('./routes/debts'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/export', require('./routes/export'));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('✅ تم الاتصال بـ MongoDB Atlas بنجاح');
+// Connect to MongoDB (cached for serverless)
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  await mongoose.connect(MONGO_URI);
+  isConnected = true;
+  console.log('✅ تم الاتصال بـ MongoDB Atlas');
+};
+
+// Middleware to ensure DB connection on each request (serverless-safe)
+app.use(async (req, res, next) => {
+  try { await connectDB(); next(); }
+  catch (err) { res.status(500).json({ message: 'فشل الاتصال بقاعدة البيانات' }); }
+});
+
+// Export for Vercel serverless
+module.exports = app;
+
+// Start server locally (only when not on Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  connectDB().then(() => {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`🚀 الخادم يعمل على المنفذ ${PORT}`));
-  })
-  .catch(err => {
+  }).catch(err => {
     console.error('❌ فشل الاتصال بـ MongoDB:', err.message);
     process.exit(1);
   });
+}
