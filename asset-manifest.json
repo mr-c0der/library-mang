@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/library-mang/static/css/main.ef78d32e.css",
+    "main.js": "/library-mang/static/js/main.9e72bcac.js",
+    "index.html": "/library-mang/index.html",
+    "main.ef78d32e.css.map": "/library-mang/static/css/main.ef78d32e.css.map",
+    "main.9e72bcac.js.map": "/library-mang/static/js/main.9e72bcac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef78d32e.css",
+    "static/js/main.9e72bcac.js"
+  ]
+}
