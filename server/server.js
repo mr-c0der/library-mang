@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Use MONGO_URI from environment (Vercel dashboard or .env file)
-// Fallback: build URI from parts for local dev
 const MONGO_URI = process.env.MONGO_URI || (() => {
   const user = encodeURIComponent('managementsystem');
   const pass = encodeURIComponent('MiS20262026');
@@ -19,7 +17,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// ── MongoDB connection (cached for serverless) ──
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected || mongoose.connection.readyState === 1) { isConnected = true; return; }
+  await mongoose.connect(MONGO_URI);
+  isConnected = true;
+  console.log('✅ تم الاتصال بـ MongoDB Atlas');
+};
+
+// Ensure DB is connected BEFORE hitting any route (important for Vercel serverless)
+app.use(async (req, res, next) => {
+  try { await connectDB(); next(); }
+  catch (err) { res.status(500).json({ message: 'فشل الاتصال بقاعدة البيانات' }); }
+});
+
+// ── Routes ──
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 app.use('/api/customers', require('./routes/customers'));
@@ -32,25 +45,10 @@ app.use('/api/debts', require('./routes/debts'));
 app.use('/api/analytics', require('./routes/analytics'));
 app.use('/api/export', require('./routes/export'));
 
-// Connect to MongoDB (cached for serverless)
-let isConnected = false;
-const connectDB = async () => {
-  if (isConnected) return;
-  await mongoose.connect(MONGO_URI);
-  isConnected = true;
-  console.log('✅ تم الاتصال بـ MongoDB Atlas');
-};
-
-// Middleware to ensure DB connection on each request (serverless-safe)
-app.use(async (req, res, next) => {
-  try { await connectDB(); next(); }
-  catch (err) { res.status(500).json({ message: 'فشل الاتصال بقاعدة البيانات' }); }
-});
-
 // Export for Vercel serverless
 module.exports = app;
 
-// Start server locally (only when not on Vercel)
+// Start server locally (nodemon / node server.js)
 if (process.env.NODE_ENV !== 'production') {
   connectDB().then(() => {
     const PORT = process.env.PORT || 5000;
